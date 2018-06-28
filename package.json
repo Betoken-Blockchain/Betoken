@@ -4,7 +4,8 @@
   "description": "A betting ledger app using blockchain technology",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server.js",
+    "server": "nodemon server.js"
   },
   "repository": {
     "type": "git",
@@ -28,6 +29,8 @@
     "validator": "^10.4.0"
   },
   "devDependencies": {
+    "eslint": "^5.0.1",
+    "eslint-plugin-react": "^7.10.0",
     "nodemon": "^1.17.5"
   }
 }

@@ -38,3 +38,6 @@ docs/api/
 
 # DotEnv
 .env
+
+# Eslint
+.eslintrc.js

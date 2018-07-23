@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 import './Auth.css';
 class Register extends Component {
   constructor() {
@@ -30,7 +31,11 @@ class Register extends Component {
       password2: this.state.password2
     };
 
-    console.log('newUser', newUser);
+    console.log('input: ', newUser);
+    axios
+      .post('/api/users/register', newUser)
+      .then(res => console.log('newUser: ', res.data))
+      .catch(err => console.log(err.response.data));
   }
 
   render() {

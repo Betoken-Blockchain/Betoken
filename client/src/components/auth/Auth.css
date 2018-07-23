@@ -38,6 +38,12 @@ input {
   font-family: 'Open Sans', Helvetica, sans-serif;
 }
 
+.form-control:focus {
+  border-color: #cccccc;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
 .input {
   width: 75%;
   height: 50px;

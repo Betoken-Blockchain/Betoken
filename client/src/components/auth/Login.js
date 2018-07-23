@@ -40,7 +40,7 @@ class Login extends Component {
             <form onSubmit={this.onSubmit}>
               <h1>account login</h1>
               <input
-                className="input pass"
+                className="input pass form-control"
                 name="email"
                 type="email"
                 placeholder="enter your email"
@@ -49,7 +49,7 @@ class Login extends Component {
                 autoFocus
               />
               <input
-                className="input pass"
+                className="input pass form-control"
                 name="password"
                 type="password"
                 placeholder="enter your password"

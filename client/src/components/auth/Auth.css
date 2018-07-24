@@ -39,6 +39,7 @@ input {
 }
 
 .form-control:focus {
+  font-weight: bold;
   border-color: #cccccc;
   -webkit-box-shadow: none;
   box-shadow: none;

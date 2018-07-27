@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
 import { loginUser } from '../../actions/authActions';
+import TextFieldGroup from '../common/TextFieldGroup';
 
 import './Auth.css';
 
@@ -62,33 +63,22 @@ class Login extends Component {
           <div id="logbox">
             <form onSubmit={this.onSubmit}>
               <h1>account login</h1>
-              <input
-                className={classnames('input pass form-control', {
-                  'is-invalid': errors.email
-                })}
+              <TextFieldGroup
+                placeholder="enter your email"
                 name="email"
                 type="email"
-                placeholder="enter your email"
                 value={this.state.email}
                 onChange={this.onChange}
-                autoFocus
+                error={errors.email}
               />
-              {errors.email && (
-                <div className="invalid-feedback">{errors.email}</div>
-              )}
-              <input
-                className={classnames('input pass form-control', {
-                  'is-invalid': errors.password
-                })}
+              <TextFieldGroup
+                placeholder="enter your password"
                 name="password"
                 type="password"
-                placeholder="enter your password"
                 value={this.state.password}
                 onChange={this.onChange}
+                error={errors.password}
               />
-              {errors.password && (
-                <div className="invalid-feedback">{errors.password}</div>
-              )}
               <input
                 className="inputButton"
                 type="submit"

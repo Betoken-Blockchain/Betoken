@@ -1,3 +1,7 @@
+.loginPage {
+  height: 100%;
+}
+
 #logbox {
   padding: 10px;
   margin: 50px auto;
@@ -17,7 +21,7 @@
 
 #logbox h1,
 input {
-  font-family: 'Open Sans', Helvetica, sans-serif;
+  font-family: "Open Sans", Helvetica, sans-serif;
 }
 
 .form-control:focus {
@@ -76,4 +80,8 @@ input {
 }
 .inputButton:focus {
   outline: none;
+}
+
+.col-md-6 {
+  margin: auto;
 }

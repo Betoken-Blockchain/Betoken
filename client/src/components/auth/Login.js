@@ -55,7 +55,7 @@ class Login extends Component {
     const { errors } = this.state;
 
     return (
-      <div>
+      <div className="loginPage">
         <h1>Login</h1>
 
         <div className="col-md-6">

@@ -1,5 +1,4 @@
 require('dotenv').config();
-console.log(process.env.SECRET);
 
 const express = require('express');
 const mongoose = require('mongoose');
@@ -8,6 +7,7 @@ const passport = require('passport');
 
 const users = require('./routes/api/users');
 const profile = require('./routes/api/profile');
+const mlb = require('./routes/api/mlb');
 
 const app = express();
 
@@ -35,6 +35,7 @@ require('./config/passport')(passport);
 // Use Routes
 app.use('/api/users', users);
 app.use('/api/profile', profile);
+app.use('/api/mlb', mlb);
 
 const port = process.env.PORT || 5000;
 

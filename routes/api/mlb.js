@@ -14,7 +14,7 @@ router.get('/test', (req, res) => res.json({ msg: 'MLB Works' }));
 // @route   GET api/mlb
 // @desc    Get all MLB events
 // @access  Public
-router.get('/all', (req, res) => {
+router.get('/', (req, res) => {
   MLB.find()
     .sort({ date: 1 })
     .then(events => res.json(events))

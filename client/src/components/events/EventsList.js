@@ -8,7 +8,7 @@ class EventsList extends Component {
     const { events } = this.props;
 
     const eventsItem = events.map(event => (
-      <div key={events.id} className="card card-body mb-2">
+      <div key={event.id} className="card card-body mb-2">
         <div className="games-schedule-items">
           <div className="row games-team">
             <div className="col-md-5">
@@ -31,9 +31,8 @@ class EventsList extends Component {
             <div className="col-md-12">
               <p>
                 <span className="glyphicon glyphicon-play-circle" />
-                <Moment format="MMM do, YYYY">{event.date}</Moment> (<small>
-                  {event.time}
-                </small>)
+                <Moment format="MMM DD, YYYY">{event.date}</Moment> (
+                <small>{event.time}</small>)
               </p>
               <p className="games-dash" />
               <p>
@@ -50,7 +49,7 @@ class EventsList extends Component {
     return (
       <div ref="myRef">
         <hr />
-        <h3 class="mb-4">Upcoming Games</h3>
+        <h3 className="mb-4">Upcoming Games</h3>
         {eventsItem}
       </div>
     );

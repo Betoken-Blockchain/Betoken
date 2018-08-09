@@ -18,8 +18,8 @@ class Navbar extends Component {
     const authLinks = (
       <ul className="navbar-nav ml-auto">
         <li className="nav-item">
-          <Link className="nav-link" to="/events">
-            Games
+          <Link className="nav-link" to="/feed">
+            Bets Feed
           </Link>
         </li>
         <li className="nav-item">
@@ -74,6 +74,11 @@ class Navbar extends Component {
               <li className="nav-item">
                 <Link className="nav-link" to="/profiles">
                   Players
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/events">
+                  Games
                 </Link>
               </li>
             </ul>

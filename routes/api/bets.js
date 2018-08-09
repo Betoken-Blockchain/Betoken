@@ -17,7 +17,7 @@ const validateBetInput = require('../../validation/bet');
 router.get('/test', (req, res) => res.json({ msg: 'Bets Works' }));
 
 // @route   GET api/bets
-// @desc    GET Bet
+// @desc    Get Bets
 // @access  Public
 router.get('/', (req, res) => {
   Bet.find()

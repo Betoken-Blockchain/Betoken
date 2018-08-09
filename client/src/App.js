@@ -21,6 +21,7 @@ import EditProfile from './components/edit-profile/EditProfile';
 import Profiles from './components/profiles/Profiles';
 import Profile from './components/profile/Profile';
 import Events from './components/events/Events';
+import Bets from './components/bets/Bets';
 
 import './App.css';
 
@@ -74,6 +75,9 @@ class App extends Component {
                   path="/edit-profile"
                   component={EditProfile}
                 />
+              </Switch>
+              <Switch>
+                <PrivateRoute exact path="/feed" component={Bets} />
               </Switch>
             </div>
             <Footer />

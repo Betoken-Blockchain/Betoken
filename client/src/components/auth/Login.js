@@ -1,18 +1,18 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { loginUser } from '../../actions/authActions';
-import TextFieldGroup from '../common/TextFieldGroup';
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { loginUser } from "../../actions/authActions";
+import TextFieldGroup from "../common/TextFieldGroup";
 
-import './Auth.css';
+import "./Auth.css";
 
 class Login extends Component {
   constructor() {
     super();
     this.state = {
-      email: '',
-      password: '',
+      email: "",
+      password: "",
       errors: {}
     };
 
@@ -26,13 +26,13 @@ class Login extends Component {
 
   componentDidMount() {
     if (this.props.auth.isAuthenticated) {
-      this.props.history.push('/dashboard');
+      this.props.history.push("/dashboard");
     }
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.auth.isAuthenticated) {
-      this.props.history.push('/dashboard');
+      this.props.history.push("/dashboard");
     }
 
     if (nextProps.errors) {
@@ -56,38 +56,38 @@ class Login extends Component {
 
     return (
       <div>
-        <h1>Login</h1>
-
-        <div className="col-md-6">
-          <div id="logbox">
-            <form onSubmit={this.onSubmit}>
-              <h1>account login</h1>
-              <TextFieldGroup
-                placeholder="enter your email"
-                name="email"
-                type="email"
-                value={this.state.email}
-                onChange={this.onChange}
-                error={errors.email}
-              />
-              <TextFieldGroup
-                placeholder="enter your password"
-                name="password"
-                type="password"
-                value={this.state.password}
-                onChange={this.onChange}
-                error={errors.password}
-              />
-              <input
-                className="inputButton"
-                type="submit"
-                value="Sign me in!"
-              />
-              <div className="text-center">
-                <Link to="/register">create an account</Link> -{' '}
-                <Link to="/">forgot password</Link>
-              </div>
-            </form>
+        <div className="loginPage">
+          <div className="col-md-6">
+            <div id="logbox">
+              <form onSubmit={this.onSubmit}>
+                <h1>account login</h1>
+                <TextFieldGroup
+                  placeholder="enter your email"
+                  name="email"
+                  type="email"
+                  value={this.state.email}
+                  onChange={this.onChange}
+                  error={errors.email}
+                />
+                <TextFieldGroup
+                  placeholder="enter your password"
+                  name="password"
+                  type="password"
+                  value={this.state.password}
+                  onChange={this.onChange}
+                  error={errors.password}
+                />
+                <input
+                  className="inputButton"
+                  type="submit"
+                  value="Sign me in!"
+                />
+                <div className="text-center">
+                  <Link to="/register">create an account</Link> -{" "}
+                  <Link to="/">forgot password</Link>
+                </div>
+              </form>
+            </div>
           </div>
         </div>
       </div>
@@ -106,7 +106,4 @@ const mapStateToProps = state => ({
   errors: state.errors
 });
 
-export default connect(
-  mapStateToProps,
-  { loginUser }
-)(Login);
+export default connect(mapStateToProps, { loginUser })(Login);

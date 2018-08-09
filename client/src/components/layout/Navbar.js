@@ -19,7 +19,7 @@ class Navbar extends Component {
       <ul className="navbar-nav ml-auto">
         <li className="nav-item">
           <Link className="nav-link" to="/events">
-            Upcoming Games
+            Games
           </Link>
         </li>
         <li className="nav-item">
@@ -73,7 +73,7 @@ class Navbar extends Component {
             <ul className="navbar-nav mr-auto">
               <li className="nav-item">
                 <Link className="nav-link" to="/profiles">
-                  Friends
+                  Players
                 </Link>
               </li>
             </ul>

@@ -55,39 +55,37 @@ class Login extends Component {
     const { errors } = this.state;
 
     return (
-      <div>
-        <div className="loginPage">
-          <div className="col-md-6">
-            <div id="logbox">
-              <form onSubmit={this.onSubmit}>
-                <h1>account login</h1>
-                <TextFieldGroup
-                  placeholder="enter your email"
-                  name="email"
-                  type="email"
-                  value={this.state.email}
-                  onChange={this.onChange}
-                  error={errors.email}
-                />
-                <TextFieldGroup
-                  placeholder="enter your password"
-                  name="password"
-                  type="password"
-                  value={this.state.password}
-                  onChange={this.onChange}
-                  error={errors.password}
-                />
-                <input
-                  className="inputButton"
-                  type="submit"
-                  value="Sign me in!"
-                />
-                <div className="text-center">
-                  <Link to="/register">create an account</Link> -{" "}
-                  <Link to="/">forgot password</Link>
-                </div>
-              </form>
-            </div>
+      <div className="loginPage">
+        <div className="col-md-6">
+          <div id="logbox">
+            <form onSubmit={this.onSubmit}>
+              <h1>account login</h1>
+              <TextFieldGroup
+                placeholder="enter your email"
+                name="email"
+                type="email"
+                value={this.state.email}
+                onChange={this.onChange}
+                error={errors.email}
+              />
+              <TextFieldGroup
+                placeholder="enter your password"
+                name="password"
+                type="password"
+                value={this.state.password}
+                onChange={this.onChange}
+                error={errors.password}
+              />
+              <input
+                className="inputButton"
+                type="submit"
+                value="Sign me in!"
+              />
+              <div className="text-center">
+                <Link to="/register">create an account</Link> -{" "}
+                <Link to="/">forgot password</Link>
+              </div>
+            </form>
           </div>
         </div>
       </div>

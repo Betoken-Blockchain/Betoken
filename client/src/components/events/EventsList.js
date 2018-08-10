@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import Moment from 'react-moment';
 
 import './Events.css';
@@ -12,16 +13,30 @@ class EventsList extends Component {
         <div className="games-schedule-items">
           <div className="row games-team">
             <div className="col-md-5">
-              <img src="http://placehold.it/115x67" alt="Away Team" />
+              <img
+                src={require(`../../img/mlb/${
+                  event.awayTeam.Abbreviation
+                }.png`)}
+                alt="Away Team"
+              />
               <span>
                 {event.awayTeam.City} {event.awayTeam.Name}
               </span>
             </div>
             <div className="col-md-2">
               <h4 className="img-circle">VS</h4>
+              <br />
+              <Link to={'/profile/'} className="btn btn-success">
+                Bet
+              </Link>
             </div>
             <div className="col-md-5">
-              <img src="http://placehold.it/115x67" alt="Home Team" />
+              <img
+                src={require(`../../img/mlb/${
+                  event.homeTeam.Abbreviation
+                }.png`)}
+                alt="Home Team"
+              />
               <span>
                 {event.homeTeam.City} {event.homeTeam.Name}
               </span>

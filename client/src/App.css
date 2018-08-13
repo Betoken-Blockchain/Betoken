@@ -37,14 +37,7 @@ body {
   padding-bottom: 60px;
 }
 
-.auth {
-  min-height: 100%;
-  min-width: 100%;
-  position: relative;
-  padding-right: 0;
-  padding-left: 0;
-}
-*/ footer {
+footer {
   position: fixed;
   bottom: 0;
   width: 100%;

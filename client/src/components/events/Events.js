@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import Spinner from '../common/Spinner';
-import { getMLBEvents } from '../../actions/eventsActions';
-import EventsHeader from './EventsHeader';
-import EventsList from './EventsList';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import Spinner from "../common/Spinner";
+import { getMLBEvents } from "../../actions/eventsActions";
+import EventsHeader from "./EventsHeader";
+import EventsList from "./EventsList";
 
 class Events extends Component {
   componentDidMount() {
@@ -47,7 +47,4 @@ const mapStateToProps = state => ({
   sport: state.sport
 });
 
-export default connect(
-  mapStateToProps,
-  { getMLBEvents }
-)(Events);
+export default connect(mapStateToProps, { getMLBEvents })(Events);

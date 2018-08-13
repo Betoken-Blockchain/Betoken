@@ -64,3 +64,7 @@
 .games-schedule-footer p {
   margin: 0;
 }
+
+.profile {
+  overflow: scroll;
+}

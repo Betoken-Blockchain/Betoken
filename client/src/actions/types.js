@@ -7,6 +7,7 @@ export const CLEAR_CURRENT_PROFILE = 'CLEAR_CURRENT_PROFILE';
 export const GET_PROFILES = 'GET_PROFILES';
 export const EVENTS_LOADING = 'EVENTS_LOADING';
 export const GET_MLB_EVENTS = 'GET_MLB_EVENTS';
+export const GET_MLB_EVENT = 'GET_MLB_EVENT';
 export const BETS_LOADING = 'BETS_LOADING';
 export const GET_BETS = 'GET_BETS';
 export const GET_BET = 'GET_BET';

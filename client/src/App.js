@@ -21,6 +21,7 @@ import EditProfile from './components/edit-profile/EditProfile';
 import Profiles from './components/profiles/Profiles';
 import Profile from './components/profile/Profile';
 import Events from './components/events/Events';
+import Event from './components/event/Event';
 import Bets from './components/bets/Bets';
 
 import './App.css';
@@ -78,6 +79,9 @@ class App extends Component {
               </Switch>
               <Switch>
                 <PrivateRoute exact path="/feed" component={Bets} />
+              </Switch>
+              <Switch>
+                <PrivateRoute exact path="/event/:id" component={Event} />
               </Switch>
             </div>
             <Footer />

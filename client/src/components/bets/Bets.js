@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import BetForm from './BetForm';
 import BetFeed from './BetFeed';
 import Spinner from '../common/Spinner';
 import { getBets } from '../../actions/betsActions';

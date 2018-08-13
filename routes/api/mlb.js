@@ -21,6 +21,17 @@ router.get('/', (req, res) => {
     .catch(err => res.status(404).json({ noevents: 'No events found' }));
 });
 
+// @route   GET api/mlb/:id
+// @desc    Get MLB event by event id
+// @access  Public
+router.get('/:id', (req, res) => {
+  MLB.findById(req.params.id)
+    .then(event => res.json(event))
+    .catch(err =>
+      res.status(404).json({ noeventfound: 'No event with this id found' })
+    );
+});
+
 // @route   POST api/mlb
 // @desc    Create MLB Event
 // @access  Public

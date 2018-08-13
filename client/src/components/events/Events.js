@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Spinner from '../common/Spinner';
-import { getMLBEvents } from '../../actions/eventsActions';
 import EventsHeader from './EventsHeader';
-import EventsList from './EventsList';
+import EventFeed from './EventFeed';
+import { getMLBEvents } from '../../actions/eventsActions';
 
 class Events extends Component {
   componentDidMount() {
@@ -18,19 +18,17 @@ class Events extends Component {
     if (events === null || loading) {
       eventContent = <Spinner />;
     } else {
-      eventContent = (
-        <div>
-          <EventsHeader sport={sport} />
-          <EventsList events={events} />
-        </div>
-      );
+      eventContent = <EventFeed events={events} />;
     }
 
     return (
-      <div className="profile">
+      <div className="feed">
         <div className="container">
           <div className="row">
-            <div className="col-md-12">{eventContent}</div>
+            <div className="col-md-12">
+              <EventsHeader sport={sport} />
+              {eventContent}
+            </div>
           </div>
         </div>
       </div>
@@ -39,7 +37,8 @@ class Events extends Component {
 }
 
 Events.propTypes = {
-  getMLBEvents: PropTypes.func.isRequired
+  getMLBEvents: PropTypes.func.isRequired,
+  events: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({

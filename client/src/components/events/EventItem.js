@@ -1,24 +1,26 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Moment from 'react-moment';
 
-import './Events.css';
-
-class EventsList extends Component {
+class EventItem extends Component {
   render() {
-    const { events } = this.props;
+    const { event } = this.props;
 
-    const eventsItem = events.map(event => (
-      <div key={event.id} className="card card-body mb-2">
+    return (
+      <div key={event._id} className="card card-body mb-2">
         <div className="games-schedule-items">
           <div className="row games-team">
             <div className="col-md-5">
               <img
+                className="mlb-logos"
                 src={require(`../../img/mlb/${
                   event.awayTeam.Abbreviation
                 }.png`)}
                 alt="Away Team"
               />
+              <br />
               <span>
                 {event.awayTeam.City} {event.awayTeam.Name}
               </span>
@@ -26,17 +28,23 @@ class EventsList extends Component {
             <div className="col-md-2">
               <h4 className="img-circle">VS</h4>
               <br />
-              <Link to={'/profile/'} className="btn btn-success">
+              <Link
+                to={`/event/${event._id}`}
+                className="btn btn-success"
+                style={{ fontSize: '20px', padding: '5% 20%' }}
+              >
                 Bet
               </Link>
             </div>
             <div className="col-md-5">
               <img
+                className="mlb-logos"
                 src={require(`../../img/mlb/${
                   event.homeTeam.Abbreviation
                 }.png`)}
                 alt="Home Team"
               />
+              <br />
               <span>
                 {event.homeTeam.City} {event.homeTeam.Name}
               </span>
@@ -59,16 +67,17 @@ class EventsList extends Component {
           </div>
         </div>
       </div>
-    ));
-
-    return (
-      <div ref="myRef">
-        <hr />
-        <h3 className="mb-4">Upcoming Games</h3>
-        {eventsItem}
-      </div>
     );
   }
 }
 
-export default EventsList;
+Event.propTypes = {
+  event: PropTypes.object.isRequired,
+  auth: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+
+export default connect(mapStateToProps)(EventItem);

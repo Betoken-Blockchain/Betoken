@@ -14,6 +14,7 @@ class CreateBet extends Component {
     super(props);
     this.state = {
       amount: '',
+      event: '',
       selectedPlayer: '',
       selectedTeam: '',
       errors: {}
@@ -30,6 +31,7 @@ class CreateBet extends Component {
   componentWillReceiveProps(newProps) {
     if (newProps.errors) {
       this.setState({ errors: newProps.errors });
+      this.setState({ event: this.props.event.event._id });
     }
   }
 
@@ -48,36 +50,33 @@ class CreateBet extends Component {
   }
 
   render() {
+    console.log('props', this.props);
+    console.log('state', this.state);
     const { errors } = this.state;
     const { event, loading } = this.props.event;
     const { profiles } = this.props.profiles;
 
     let betContent;
 
-    // Select Team
     const teamOptions = [
       { label: '* Pick Team', value: 0 },
       { label: event.awayTeam.Name, value: event.awayTeam.Name },
       { label: event.homeTeam.Name, value: event.homeTeam.Name }
     ];
-    const playerOptions = [{ label: '* Pick Player', value: 0 }];
+
+    let playerOptions = { label: '* Pick Player', value: 0 };
 
     if (event === null || profiles === null || loading) {
       betContent = <Spinner />;
     } else {
-      const playerOptions = profiles.map(profile => [
-        {
-          label: profile.user._id,
+      const players = profiles.map(profile => {
+        return {
+          label: profile.user.name,
           value: profile.user._id
-        }
-      ]);
+        };
+      });
+      playerOptions = [playerOptions, ...players];
 
-      console.log('players: ', playerOptions);
-    }
-
-    if (playerOptions === null) {
-      console.log('No players yet');
-    } else {
       betContent = (
         <div className="bet-form mb-3">
           <div className="card card-info">
@@ -96,7 +95,7 @@ class CreateBet extends Component {
                   />
                   <SelectListGroup
                     placeholder="Pick a team"
-                    name="profile"
+                    name="selectedTeam"
                     value={this.state.selectedTeam}
                     options={teamOptions}
                     onChange={this.onChange}

@@ -33,7 +33,7 @@ class Event extends Component {
       eventContent = (
         <div>{<EventItem event={event} showActions={false} />}</div>
       );
-      betContent = <CreateBet eventId={event} />;
+      betContent = <CreateBet event={event} />;
     }
 
     return (

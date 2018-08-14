@@ -1,30 +1,30 @@
-import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import jwt_decode from 'jwt-decode';
-import setAuthToken from './utils/setAuthToken';
-import { setCurrentUser, logoutUser } from './actions/authActions';
-import { clearCurrentProfile } from './actions/profileActions';
+import React, { Component } from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import jwt_decode from "jwt-decode";
+import setAuthToken from "./utils/setAuthToken";
+import { setCurrentUser, logoutUser } from "./actions/authActions";
+import { clearCurrentProfile } from "./actions/profileActions";
 
-import { Provider } from 'react-redux';
-import store from './store';
+import { Provider } from "react-redux";
+import store from "./store";
 
-import PrivateRoute from './components/common/PrivateRoute';
+import PrivateRoute from "./components/common/PrivateRoute";
 
-import Navbar from './components/layout/Navbar';
-import Footer from './components/layout/Footer';
-import Landing from './components/layout/Landing';
-import Register from './components/auth/Register';
-import Login from './components/auth/Login';
-import Dashboard from './components/dashboard/Dashboard';
-import CreateProfile from './components/create-profile/CreateProfile';
-import EditProfile from './components/edit-profile/EditProfile';
-import Profiles from './components/profiles/Profiles';
-import Profile from './components/profile/Profile';
-import Events from './components/events/Events';
-import Event from './components/event/Event';
-import Bets from './components/bets/Bets';
+import Navbar from "./components/layout/Navbar";
+import Footer from "./components/layout/Footer";
+import Landing from "./components/layout/Landing";
+import Register from "./components/auth/Register";
+import Login from "./components/auth/Login";
+import Dashboard from "./components/dashboard/Dashboard";
+import CreateProfile from "./components/create-profile/CreateProfile";
+import EditProfile from "./components/edit-profile/EditProfile";
+import Profiles from "./components/profiles/Profiles";
+import Profile from "./components/profile/Profile";
+import Events from "./components/events/Events";
+import Event from "./components/event/Event";
+import Bets from "./components/bets/Bets";
 
-import './App.css';
+import "./App.css";
 
 // Check for token
 if (localStorage.jwtToken) {
@@ -43,7 +43,7 @@ if (localStorage.jwtToken) {
     // Clear current Profile
     store.dispatch(clearCurrentProfile());
     // Redirect to login
-    window.location.href = '/login';
+    window.location.href = "/login";
   }
 }
 class App extends Component {
@@ -53,8 +53,8 @@ class App extends Component {
         <Router>
           <div className="App">
             <Navbar />
-            <Route exact path="/" component={Landing} />
             <div className="container auth">
+              <Route exact path="/" component={Landing} />
               <Route exact path="/register" component={Register} />
               <Route exact path="/login" component={Login} />
               <Route exact path="/profiles" component={Profiles} />

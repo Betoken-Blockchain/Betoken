@@ -1,11 +1,9 @@
 .loginPage {
   background: url("../../img/login-image.jpeg") no-repeat;
-  background-size: 100%;
+  background-size: cover;
   background-position: center;
   height: 100%;
   width: 100%;
-  margin-top: -24px;
-  margin-bottom: -50px;
   position: absolute;
 }
 
@@ -15,8 +13,6 @@
   background-position: center;
   height: 100%;
   width: 100%;
-  margin-top: -24px;
-  margin-bottom: -50px;
   position: absolute;
 }
 
@@ -114,6 +110,5 @@ input {
   width: 100%;
   position: relative;
   display: flex;
-  padding-bottom: 55px;
   opacity: 0.95;
 }

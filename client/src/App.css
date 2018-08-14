@@ -62,3 +62,13 @@ footer {
 .col-md-12 {
   padding: 10px;
 }
+
+.feed {
+  background-color: #f7f9fc;
+  background-size: cover;
+}
+
+.profiles {
+  height: -webkit-fill-available;
+  background-color: #f7f9fc;
+}

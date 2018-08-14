@@ -22,6 +22,9 @@ router.get('/test', (req, res) => res.json({ msg: 'Bets Works' }));
 router.get('/', (req, res) => {
   Bet.find()
     .sort({ createdAt: -1 })
+    .populate('sender')
+    .populate('receiver')
+    .populate('event')
     .then(bets => res.json(bets))
     .catch(err => res.status(404)({ nobetsfound: 'No bets found' }));
 });
@@ -30,10 +33,12 @@ router.get('/', (req, res) => {
 // @desc    GET Bet by id
 // @access  Public
 router.get('/:id', (req, res) => {
-  Bet.findById(req.params.id)
-    .then(bets => res.json(bets))
+  Bet.find()
+    .populate('receiver')
+    .populate('sender')
+    .then(bet => res.json(bet))
     .catch(err =>
-      res.status(404)({ nobetsfound: 'No bets found with that id' })
+      res.status(404).json({ nobetsfound: 'No bets found with that id' })
     );
 });
 
@@ -55,7 +60,7 @@ router.post(
     const newBet = new Bet({
       sender: req.user.id,
       receiver: req.body.receiver,
-      eventId: req.body.eventId,
+      event: req.body.event,
       senderPick: req.body.senderPick,
       amount: req.body.amount,
       accepted: false

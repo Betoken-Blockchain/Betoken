@@ -43,7 +43,7 @@ class CreateBet extends Component {
     const newBet = {
       sender: user.id,
       receiver: this.state.selectedPlayer,
-      eventId: this.state.event,
+      event: this.state.event,
       senderPick: this.state.selectedTeam,
       amount: this.state.amount
     };

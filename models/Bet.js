@@ -5,14 +5,15 @@ const Schema = mongoose.Schema;
 const BetSchema = new Schema({
   sender: {
     type: Schema.Types.ObjectId,
-    ref: 'Users'
+    ref: 'User'
   },
   receiver: {
     type: Schema.Types.ObjectId,
-    ref: 'Users'
+    ref: 'User'
   },
-  eventId: {
-    type: String
+  event: {
+    type: Schema.Types.ObjectId,
+    ref: 'MLB'
   },
   senderPick: {
     type: String

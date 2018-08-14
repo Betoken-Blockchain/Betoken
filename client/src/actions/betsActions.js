@@ -4,6 +4,7 @@ import {
   ADD_BET,
   GET_ERRORS,
   GET_BETS,
+  GET_BET,
   BETS_LOADING,
   CLEAR_ERRORS
 } from './types';
@@ -41,6 +42,25 @@ export const getBets = () => dispatch => {
     .catch(err =>
       dispatch({
         type: GET_BETS,
+        payload: null
+      })
+    );
+};
+
+// Get Bet by Id
+export const getBet = id => dispatch => {
+  dispatch(setBetLoading());
+  axios
+    .get(`/api/bets/${id}`)
+    .then(res =>
+      dispatch({
+        type: GET_BET,
+        payload: res.data
+      })
+    )
+    .catch(err =>
+      dispatch({
+        type: GET_BET,
         payload: null
       })
     );

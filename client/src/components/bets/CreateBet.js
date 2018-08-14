@@ -50,10 +50,6 @@ class CreateBet extends Component {
     console.log('bet', newBet);
 
     this.props.addBet(newBet, this.props.history);
-
-    // if (!errors) {
-    //   this.props.history.push('/feed');
-    // }
   }
 
   onChange(e) {

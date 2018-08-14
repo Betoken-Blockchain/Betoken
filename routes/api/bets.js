@@ -61,7 +61,10 @@ router.post(
       accepted: false
     });
 
-    newBet.save().then(bet => res.json(bet));
+    newBet
+      .save()
+      .then(bet => res.json(bet))
+      .catch(err => res.status(400).json(err));
   }
 );
 

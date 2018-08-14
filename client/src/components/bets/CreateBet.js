@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import Spinner from '../common/Spinner';
 import TextFieldGroup from '../common/TextFieldGroup';
 import SelectListGroup from '../common/SelectListGroup';
@@ -26,12 +26,12 @@ class CreateBet extends Component {
 
   componentDidMount() {
     this.props.getProfiles();
+    this.setState({ event: this.props.event.event._id });
   }
 
-  componentWillReceiveProps(newProps) {
-    if (newProps.errors) {
-      this.setState({ errors: newProps.errors });
-      this.setState({ event: this.props.event.event._id });
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.errors) {
+      this.setState({ errors: nextProps.errors });
     }
   }
 
@@ -41,8 +41,19 @@ class CreateBet extends Component {
     const { user } = this.props.auth;
 
     const newBet = {
+      sender: user.id,
+      receiver: this.state.selectedPlayer,
+      eventId: this.state.event,
+      senderPick: this.state.selectedTeam,
       amount: this.state.amount
     };
+    console.log('bet', newBet);
+
+    this.props.addBet(newBet, this.props.history);
+
+    // if (!errors) {
+    //   this.props.history.push('/feed');
+    // }
   }
 
   onChange(e) {
@@ -50,11 +61,10 @@ class CreateBet extends Component {
   }
 
   render() {
-    console.log('props', this.props);
     console.log('state', this.state);
     const { errors } = this.state;
     const { event, loading } = this.props.event;
-    const { profiles } = this.props.profiles;
+    const { profiles } = this.props;
 
     let betContent;
 
@@ -64,7 +74,7 @@ class CreateBet extends Component {
       { label: event.homeTeam.Name, value: event.homeTeam.Name }
     ];
 
-    let playerOptions = { label: '* Pick Player', value: 0 };
+    let playerOptions;
 
     if (event === null || profiles === null || loading) {
       betContent = <Spinner />;
@@ -75,7 +85,7 @@ class CreateBet extends Component {
           value: profile.user._id
         };
       });
-      playerOptions = [playerOptions, ...players];
+      playerOptions = [{ label: '* Pick Player', value: 0 }, ...players];
 
       betContent = (
         <div className="bet-form mb-3">
@@ -90,7 +100,7 @@ class CreateBet extends Component {
                     value={this.state.selectedPlayer}
                     options={playerOptions}
                     onChange={this.onChange}
-                    error={errors.selectedPlayer}
+                    error={errors.receiver}
                     info="Choose player"
                   />
                   <SelectListGroup
@@ -99,7 +109,7 @@ class CreateBet extends Component {
                     value={this.state.selectedTeam}
                     options={teamOptions}
                     onChange={this.onChange}
-                    error={errors.selectedTeam}
+                    error={errors.senderPick}
                     info="Pick a team"
                   />
                   <TextFieldGroup
@@ -140,17 +150,17 @@ CreateBet.propTypes = {
   getProfiles: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired,
-  profiles: PropTypes.object.isRequired
+  profiles: PropTypes.array.isRequired
 };
 
 const mapStateToProps = state => ({
   auth: state.auth,
   errors: state.errors,
   event: state.events,
-  profiles: state.profile
+  profiles: state.profile.profiles
 });
 
 export default connect(
   mapStateToProps,
   { addBet, getEvent, getProfiles }
-)(CreateBet);
+)(withRouter(CreateBet));

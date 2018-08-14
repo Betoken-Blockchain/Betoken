@@ -22,7 +22,7 @@ export default function(state = initialState, action) {
   case ADD_BET:
     return {
       ...state,
-      posts: [action.payload, ...state.posts]
+      bets: [action.payload, ...state.bets]
     };
   default:
     return state;

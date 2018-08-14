@@ -20,7 +20,7 @@ const BetSchema = new Schema({
   amount: {
     type: Number
   },
-  accept: {
+  accepted: {
     type: Boolean
   },
   createdAt: {

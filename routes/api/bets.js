@@ -57,7 +57,8 @@ router.post(
       receiver: req.body.receiver,
       eventId: req.body.eventId,
       senderPick: req.body.senderPick,
-      amount: req.body.amount
+      amount: req.body.amount,
+      accepted: false
     });
 
     newBet.save().then(bet => res.json(bet));

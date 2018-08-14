@@ -69,6 +69,6 @@ footer {
 }
 
 .profiles {
-  height: -webkit-fill-available;
+  height: -webkit-stretch;
   background-color: #f7f9fc;
 }

@@ -1,9 +1,15 @@
 import axios from 'axios';
 
-import { ADD_BET, GET_ERRORS, GET_BETS, BETS_LOADING } from './types';
+import {
+  ADD_BET,
+  GET_ERRORS,
+  GET_BETS,
+  BETS_LOADING,
+  CLEAR_ERRORS
+} from './types';
 
 // Add Bet
-export const addBet = betData => dispatch => {
+export const addBet = (betData, history) => dispatch => {
   axios
     .post('/api/bets', betData)
     .then(res =>
@@ -12,10 +18,11 @@ export const addBet = betData => dispatch => {
         payload: res.data
       })
     )
+    .then(res => history.push('/feed'))
     .catch(err =>
       dispatch({
         type: GET_ERRORS,
-        payload: err.response.data
+        payload: err
       })
     );
 };
@@ -43,5 +50,12 @@ export const getBets = () => dispatch => {
 export const setBetLoading = () => {
   return {
     type: BETS_LOADING
+  };
+};
+
+// Clear Errors
+export const clearErrors = () => {
+  return {
+    type: CLEAR_ERRORS
   };
 };

@@ -3,10 +3,20 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import EventItem from '../events/EventItem';
+import CreateBet from '../bets/CreateBet';
 import Spinner from '../common/Spinner';
 import { getEvent } from '../../actions/eventsActions';
 
 class Event extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      amount: '',
+      receiverProfile: {},
+      errors: {}
+    };
+  }
+
   componentDidMount() {
     this.props.getEvent(this.props.match.params.id);
   }
@@ -15,12 +25,15 @@ class Event extends Component {
     const { loading } = this.props;
     const { event } = this.props.event;
     let eventContent;
+    let betContent;
 
-    if (event === null || loading) {
+    if (event === null || loading || Object.keys(event).length === 0) {
       eventContent = <Spinner />;
     } else {
-      // eventContent = <div>{<EventItem event={event} />}</div>;
-      eventContent = <div>{event.location}</div>;
+      eventContent = (
+        <div>{<EventItem event={event} showActions={false} />}</div>
+      );
+      betContent = <CreateBet eventId={event} />;
     }
 
     return (
@@ -28,10 +41,16 @@ class Event extends Component {
         <div className="container">
           <div className="row">
             <div className="col-md-12">
-              <Link to="/events" className="btn btn-light mb-3">
+              <Link to="/events" className="btn btn-secondary mb-3">
                 Back to Games
               </Link>
               {eventContent}
+            </div>
+            <div
+              className="col-md-8 col-md-offset-2"
+              style={{ margin: '0 auto' }}
+            >
+              {betContent}
             </div>
           </div>
         </div>

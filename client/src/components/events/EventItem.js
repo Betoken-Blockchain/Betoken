@@ -6,7 +6,7 @@ import Moment from 'react-moment';
 
 class EventItem extends Component {
   render() {
-    const { event } = this.props;
+    const { event, showActions } = this.props;
 
     return (
       <div key={event._id} className="card card-body mb-2">
@@ -28,13 +28,15 @@ class EventItem extends Component {
             <div className="col-md-2">
               <h4 className="img-circle">VS</h4>
               <br />
-              <Link
-                to={`/event/${event._id}`}
-                className="btn btn-success"
-                style={{ fontSize: '20px', padding: '5% 20%' }}
-              >
-                Bet
-              </Link>
+              {showActions ? (
+                <Link
+                  to={`/event/${event._id}`}
+                  className="btn btn-success"
+                  style={{ fontSize: '20px', padding: '5% 20%' }}
+                >
+                  Bet
+                </Link>
+              ) : null}
             </div>
             <div className="col-md-5">
               <img
@@ -70,6 +72,10 @@ class EventItem extends Component {
     );
   }
 }
+
+EventItem.defaultProps = {
+  showActions: true
+};
 
 Event.propTypes = {
   event: PropTypes.object.isRequired,

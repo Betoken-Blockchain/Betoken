@@ -67,7 +67,17 @@ router.post(
       accepted: false
     });
 
-    newBet.save().then(bet => res.json(bet));
+    // newBet.save().then(bet => res.json(bet));
+    newBet
+      .save()
+      .then(bet =>
+        bet
+          .populate('event')
+          .populate('sender')
+          .populate('receiver')
+          .execPopulate()
+      )
+      .then(b => res.json(b));
   }
 );
 

@@ -46,7 +46,7 @@ class CreateBet extends Component {
     ) {
       receiverPick = this.props.event.event.homeTeam.Abbreviation;
     } else {
-      receiverPick = this.props.event.event.awatTeam.Abbreviation;
+      receiverPick = this.props.event.event.awayTeam.Abbreviation;
     }
 
     const newBet = {

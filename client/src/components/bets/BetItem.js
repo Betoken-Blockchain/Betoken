@@ -9,7 +9,8 @@ class BetItem extends Component {
     super(props);
     this.state = {
       isSender: false,
-      isReceiver: false
+      isReceiver: false,
+      accepted: false
     };
   }
 
@@ -20,13 +21,44 @@ class BetItem extends Component {
     } else if (this.props.auth.user.id === this.props.bet.receiver) {
       this.setState({ isReceiver: true });
     }
+
+    this.setState({ accepted: this.props.bet.accepted });
   }
 
   render() {
     const { auth, bet } = this.props;
     console.log('Props: ', this.props);
-    let betContent;
+    console.log('State: ', this.state);
 
+    let acceptButton;
+    if (this.state.accepted === false) {
+      if (auth.user.id === bet.sender._id) {
+        acceptButton = (
+          <button type="button" class="btn btn-danger accept-button">
+            Cancel Bet
+          </button>
+        );
+      } else if (auth.user.id === bet.receiver._id) {
+        acceptButton = (
+          <button type="button" class="btn btn-success accept-button">
+            Accept Bet
+          </button>
+        );
+      } else {
+        null;
+      }
+    } else {
+      acceptButton = null;
+    }
+
+    let acceptedBadge;
+    if (this.state.accepted === false) {
+      acceptedBadge = (
+        <span class="badge badge-warning accepted-badge">Not Accepted</span>
+      );
+    }
+
+    let betContent;
     if (bet) {
       betContent = (
         <div className="card card-body mb-2">
@@ -35,9 +67,7 @@ class BetItem extends Component {
               <div className="col-md-5">
                 <h3>{bet.receiver.name}</h3>
               </div>
-              <div className="col-md-2">
-                <h4 className="img-circle">VS</h4>
-              </div>
+              <div className="col-md-2">{acceptButton}</div>
               <div className="col-md-5">
                 <div className="row" />
                 <h3>{bet.sender.name}</h3>
@@ -47,11 +77,9 @@ class BetItem extends Component {
               <div className="col-md-5">
                 <img
                   className="mlb-logos"
-                  src={require(`../../img/mlb/${
-                    bet.receiverPick
-                  }.png`)}
+                  src={require(`../../img/mlb/${bet.receiverPick}.png`)}
                   alt="Away Team"
-                  style={{width: '50%', height: 'auto'}}
+                  style={{ width: '30%', height: 'auto' }}
                 />
               </div>
               <div className="col-md-2">
@@ -61,20 +89,15 @@ class BetItem extends Component {
                 <div className="row" />
                 <img
                   className="mlb-logos"
-                  src={require(`../../img/mlb/${
-                    bet.senderPick
-                  }.png`)}
+                  src={require(`../../img/mlb/${bet.senderPick}.png`)}
                   alt="Away Team"
-                  style={{ width: '50%', height: 'auto' }}
+                  style={{ width: '30%', height: 'auto' }}
                 />
               </div>
             </div>
             <div className="row games-info">
               <div className="col-md-12">
-                <p>
-                  <span className="glyphicon glyphicon-play-circle" />
-                  Accepted:
-                </p>
+                {acceptedBadge}
                 <p className="games-dash" />
                 <p>
                   <small>

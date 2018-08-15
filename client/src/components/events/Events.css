@@ -68,3 +68,12 @@
 .profile {
   overflow: scroll;
 }
+
+.accept-button {
+  margin: 0 -10px;
+}
+
+.accepted-badge {
+  margin-bottom: 10px;
+  font-size: 100%;
+}

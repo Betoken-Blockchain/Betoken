@@ -20,6 +20,12 @@ class Bets extends Component {
 
     if (bets === null || loading) {
       betContent = <Spinner />;
+    } else if (bets.length === 0) {
+      betContent = (
+        <h5>
+          <i>There are no bets</i>
+        </h5>
+      );
     } else {
       betContent = <BetFeed bets={bets} />;
     }

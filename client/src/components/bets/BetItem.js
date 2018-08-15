@@ -51,6 +51,7 @@ class BetItem extends Component {
                     bet.receiverPick
                   }.png`)}
                   alt="Away Team"
+                  style={{width: '50%', height: 'auto'}}
                 />
               </div>
               <div className="col-md-2">
@@ -64,6 +65,7 @@ class BetItem extends Component {
                     bet.senderPick
                   }.png`)}
                   alt="Away Team"
+                  style={{ width: '50%', height: 'auto' }}
                 />
               </div>
             </div>

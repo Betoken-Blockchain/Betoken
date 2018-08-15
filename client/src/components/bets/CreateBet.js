@@ -57,7 +57,6 @@ class CreateBet extends Component {
       receiverPick: receiverPick,
       amount: this.state.amount
     };
-    console.log('newbet', newBet);
     this.props.addBet(newBet, this.props.history);
   }
 
@@ -66,12 +65,10 @@ class CreateBet extends Component {
   }
 
   render() {
-    console.log('state', this.state);
-
     const { errors } = this.state;
     const { event, loading } = this.props.event;
-    const { profiles } = this.props;
-    console.log('event', event);
+    const { profiles } = this.props.profiles;
+    const { auth } = this.props;
 
     let betContent;
 
@@ -86,12 +83,14 @@ class CreateBet extends Component {
     if (event === null || profiles === null || loading) {
       betContent = <Spinner />;
     } else {
-      const players = profiles.map(profile => {
-        return {
-          label: profile.user.name,
-          value: profile.user._id
-        };
-      });
+      const players = profiles
+        .filter(profile => profile.user._id !== auth.user.id)
+        .map(profile => {
+          return {
+            label: profile.user.name,
+            value: profile.user._id
+          };
+        });
       playerOptions = [{ label: '* Pick Player', value: 0 }, ...players];
 
       betContent = (
@@ -157,14 +156,14 @@ CreateBet.propTypes = {
   getProfiles: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired,
-  profiles: PropTypes.array.isRequired
+  profiles: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
   auth: state.auth,
   errors: state.errors,
   event: state.events,
-  profiles: state.profile.profiles
+  profiles: state.profile
 });
 
 export default connect(

@@ -40,15 +40,24 @@ class CreateBet extends Component {
 
     const { user } = this.props.auth;
 
+    let receiverPick;
+    if (
+      this.state.selectedTeam === this.props.event.event.awayTeam.Abbreviation
+    ) {
+      receiverPick = this.props.event.event.homeTeam.Abbreviation;
+    } else {
+      receiverPick = this.props.event.event.awatTeam.Abbreviation;
+    }
+
     const newBet = {
       sender: user.id,
       receiver: this.state.selectedPlayer,
       event: this.state.event,
       senderPick: this.state.selectedTeam,
+      receiverPick: receiverPick,
       amount: this.state.amount
     };
-    console.log('bet', newBet);
-
+    console.log('newbet', newBet);
     this.props.addBet(newBet, this.props.history);
   }
 
@@ -58,16 +67,18 @@ class CreateBet extends Component {
 
   render() {
     console.log('state', this.state);
+
     const { errors } = this.state;
     const { event, loading } = this.props.event;
     const { profiles } = this.props;
+    console.log('event', event);
 
     let betContent;
 
     const teamOptions = [
       { label: '* Pick Team', value: 0 },
-      { label: event.awayTeam.Name, value: event.awayTeam.Name },
-      { label: event.homeTeam.Name, value: event.homeTeam.Name }
+      { label: event.awayTeam.Name, value: event.awayTeam.Abbreviation },
+      { label: event.homeTeam.Name, value: event.homeTeam.Abbreviation }
     ];
 
     let playerOptions;

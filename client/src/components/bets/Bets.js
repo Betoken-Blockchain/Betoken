@@ -6,12 +6,16 @@ import Spinner from '../common/Spinner';
 import { getBets } from '../../actions/betsActions';
 
 class Bets extends Component {
-  componentDidMount() {
+  componentWillMount() {
     this.props.getBets();
   }
 
+  componentWillReceiveProps(newProps) {
+    //
+  }
+
   render() {
-    const { bets, loading } = this.props.bets;
+    const { bets, loading } = this.props;
     let betContent;
 
     if (bets === null || loading) {
@@ -37,11 +41,11 @@ class Bets extends Component {
 
 Bets.propTypes = {
   getBets: PropTypes.func.isRequired,
-  bets: PropTypes.object.isRequired
+  bets: PropTypes.array.isRequired
 };
 
 const mapStateToProps = state => ({
-  bets: state.bets
+  bets: state.bets.bets
 });
 
 export default connect(

@@ -18,6 +18,9 @@ const BetSchema = new Schema({
   senderPick: {
     type: String
   },
+  receiverPick: {
+    type: String
+  },
   amount: {
     type: Number
   },

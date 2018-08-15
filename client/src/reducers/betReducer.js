@@ -20,6 +20,7 @@ export default function(state = initialState, action) {
       loading: false
     };
   case ADD_BET:
+    console.log('actionPayload ', action.payload);
     return {
       ...state,
       bets: [action.payload, ...state.bets]

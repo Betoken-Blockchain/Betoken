@@ -62,14 +62,12 @@ router.post(
       receiver: req.body.receiver,
       event: req.body.event,
       senderPick: req.body.senderPick,
+      receiverPick: req.body.receiverPick,
       amount: req.body.amount,
       accepted: false
     });
 
-    newBet
-      .save()
-      .then(bet => res.json(bet))
-      .catch(err => res.status(400).json(err));
+    newBet.save().then(bet => res.json(bet));
   }
 );
 

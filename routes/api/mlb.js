@@ -75,4 +75,46 @@ router.post('/', (req, res) => {
   new MLB(eventFields).save().then(event => res.json(event));
 });
 
+// @route   POST api/mlb
+// @desc    Create MLB Events
+// @access  Public
+router.post('/list', (req, res) => {
+  // Map through list
+  let list = req.body;
+  list.map(event => {
+    // Get fields
+    const eventFields = {};
+    if (event.id) eventFields.id = event.id;
+    if (event.scheduleStatus) eventFields.scheduleStatus = event.scheduleStatus;
+    if (event.originalDate) eventFields.originalDate = event.originalDate;
+    if (event.originalTime) eventFields.originalTime = event.originalTime;
+    if (event.delayedOrPostponedReason)
+      eventFields.delayedOrPostponedReason = event.delayedOrPostponedReason;
+    if (event.date) eventFields.date = event.date;
+    if (event.time) eventFields.time = event.time;
+    if (event.location) eventFields.location = event.location;
+
+    // Away Teams
+    eventFields.awayTeam = {};
+    if (event.awayTeam.City) eventFields.awayTeam.City = event.awayTeam.City;
+    if (event.awayTeam.Name) eventFields.awayTeam.Name = event.awayTeam.Name;
+    if (event.awayTeam.Abbreviation)
+      eventFields.awayTeam.Abbreviation = event.awayTeam.Abbreviation;
+    if (event.awayTeam.finalScore)
+      eventFields.awayTeam.finalScore = event.awayTeam.finalScore;
+
+    // Home Teams
+    eventFields.homeTeam = {};
+    if (event.homeTeam.City) eventFields.homeTeam.City = event.homeTeam.City;
+    if (event.homeTeam.Name) eventFields.homeTeam.Name = event.homeTeam.Name;
+    if (event.homeTeam.Abbreviation)
+      eventFields.homeTeam.Abbreviation = event.homeTeam.Abbreviation;
+    if (event.homeTeam.finalScore)
+      eventFields.homeTeam.finalScore = event.homeTeam.finalScore;
+
+    // Save Event
+    new MLB(eventFields).save().then(event => res.json(event));
+  });
+});
+
 module.exports = router;

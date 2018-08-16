@@ -11,13 +11,20 @@ class Events extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // displayDate: moment(new Date()).format('YYYY-MM-DD')
-      displayDate: '2018-08-07'
+      displayDate: moment(new Date()).format('YYYY-MM-DD')
+      // displayDate: '2018-08-08'
     };
+
+    this.onSelectDate = this.onSelectDate.bind(this);
   }
 
   componentDidMount() {
     this.props.getMLBEvents();
+  }
+
+  onSelectDate(date) {
+    this.setState({ displayDate: date });
+    console.log('clicked');
   }
 
   render() {
@@ -38,6 +45,39 @@ class Events extends Component {
       event => event.date === this.state.displayDate
     );
     console.log(selectedEvents);
+    let eventSelect = (
+      <div className="dates">
+        <div className="container">
+          <div className="row">
+            <div className="col-md-12">
+              <div className="btn-group">
+                <button
+                  onClick={() => this.onSelectDate(today)}
+                  type="button"
+                  className="btn btn-outline-primary"
+                >
+                  Today
+                </button>
+                <button
+                  onClick={() => this.onSelectDate(tomorrow)}
+                  type="button"
+                  className="btn btn-outline-primary"
+                >
+                  Tomorrow
+                </button>
+                <button
+                  onClick={() => this.onSelectDate(twoDaysFromNow)}
+                  type="button"
+                  className="btn btn-outline-primary"
+                >
+                  {moment(twoDaysFromNow).format('MMM DD')}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
 
     if (events === null || loading) {
       eventContent = <Spinner />;
@@ -51,6 +91,7 @@ class Events extends Component {
           <div className="row">
             <div className="col-md-12">
               <EventsHeader />
+              {eventSelect}
               {eventContent}
             </div>
           </div>

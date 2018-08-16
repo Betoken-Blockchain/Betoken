@@ -21,9 +21,7 @@ class EventsHeader extends Component {
     return (
       <div className="row">
         <div className="col-md-12">
-          <div className="text-white mb-3">
-            <div className="text-center">{mlbHeader}</div>
-          </div>
+          <div className="text-center">{mlbHeader}</div>
         </div>
       </div>
     );

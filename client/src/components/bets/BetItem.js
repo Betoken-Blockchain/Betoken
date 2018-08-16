@@ -64,6 +64,7 @@ class BetItem extends Component {
             >
               Accept
             </button>
+            <br />
             <button
               onClick={this.onDeleteClick.bind(this, bet._id)}
               type="button"

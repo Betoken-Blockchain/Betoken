@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import moment from 'moment';
+import classnames from 'classnames';
 import Spinner from '../common/Spinner';
 import EventsHeader from './EventsHeader';
 import EventFeed from './EventFeed';
@@ -11,8 +12,8 @@ class Events extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      selectedDateBtn: 'today',
       displayDate: moment(new Date()).format('YYYY-MM-DD')
-      // displayDate: '2018-08-08'
     };
 
     this.onSelectDate = this.onSelectDate.bind(this);
@@ -22,9 +23,9 @@ class Events extends Component {
     this.props.getMLBEvents();
   }
 
-  onSelectDate(date) {
+  onSelectDate(date, day) {
     this.setState({ displayDate: date });
-    console.log('clicked');
+    this.setState({ selectedDateBtn: day });
   }
 
   render() {
@@ -44,7 +45,6 @@ class Events extends Component {
     let selectedEvents = events.filter(
       event => event.date === this.state.displayDate
     );
-    console.log(selectedEvents);
     let eventSelect = (
       <div className="dates">
         <div className="container">
@@ -52,23 +52,38 @@ class Events extends Component {
             <div className="col-md-12">
               <div className="btn-group">
                 <button
-                  onClick={() => this.onSelectDate(today)}
+                  onClick={() => this.onSelectDate(today, 'today')}
                   type="button"
-                  className="btn btn-outline-primary"
+                  className={classnames('btn', {
+                    'btn-primary': this.state.selectedDateBtn === 'today',
+                    'btn-outline-primary':
+                      this.state.selectedDateBtn !== 'today'
+                  })}
                 >
                   Today
                 </button>
                 <button
-                  onClick={() => this.onSelectDate(tomorrow)}
+                  onClick={() => this.onSelectDate(tomorrow, 'tomorrow')}
                   type="button"
-                  className="btn btn-outline-primary"
+                  className={classnames('btn', {
+                    'btn-primary': this.state.selectedDateBtn === 'tomorrow',
+                    'btn-outline-primary':
+                      this.state.selectedDateBtn !== 'tomorrow'
+                  })}
                 >
                   Tomorrow
                 </button>
                 <button
-                  onClick={() => this.onSelectDate(twoDaysFromNow)}
+                  onClick={() =>
+                    this.onSelectDate(twoDaysFromNow, 'twoDaysFromNow')
+                  }
                   type="button"
-                  className="btn btn-outline-primary"
+                  className={classnames('btn', {
+                    'btn-primary':
+                      this.state.selectedDateBtn === 'twoDaysFromNow',
+                    'btn-outline-primary':
+                      this.state.selectedDateBtn !== 'twoDaysFromNow'
+                  })}
                 >
                   {moment(twoDaysFromNow).format('MMM DD')}
                 </button>

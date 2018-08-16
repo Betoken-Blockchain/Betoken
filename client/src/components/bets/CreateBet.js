@@ -139,11 +139,9 @@ class CreateBet extends Component {
     }
 
     return (
-      <div className="profile">
-        <div className="container">
-          <div className="row">
-            <div className="col-md-12">{betContent}</div>
-          </div>
+      <div className="container">
+        <div className="row">
+          <div className="col-md-12">{betContent}</div>
         </div>
       </div>
     );

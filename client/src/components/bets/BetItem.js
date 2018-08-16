@@ -29,7 +29,6 @@ class BetItem extends Component {
   onDeleteClick(id) {
     if (window.confirm('Cancel this bet?')) {
       this.props.deleteBet(id);
-      console.log('Bet Deleted');
     }
   }
 
@@ -37,13 +36,11 @@ class BetItem extends Component {
     if (window.confirm('Accept this bet?')) {
       this.props.acceptBet(id);
       this.setState({ accepted: true });
-      console.log('Bet Accepted');
     }
   }
 
   render() {
     const { auth, bet } = this.props;
-    console.log('Props: ', this.props);
 
     let acceptButton;
     if (this.state.accepted === false) {

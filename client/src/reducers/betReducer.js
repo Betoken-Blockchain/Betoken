@@ -1,4 +1,4 @@
-import { ADD_BET, GET_BETS, BETS_LOADING } from '../actions/types';
+import { ADD_BET, GET_BETS, DELETE_BET, BETS_LOADING } from '../actions/types';
 
 const initialState = {
   bets: [],
@@ -23,6 +23,11 @@ export default function(state = initialState, action) {
     return {
       ...state,
       bets: [action.payload, ...state.bets]
+    };
+  case DELETE_BET:
+    return {
+      ...state,
+      bets: state.bets.filter(bet => bet._id !== action.payload)
     };
   default:
     return state;

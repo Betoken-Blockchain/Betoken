@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import MLBLogo from '../../img/mlb/MLB-Logo.png';
 class EventsHeader extends Component {
   render() {
-    const { sport } = this.props;
-
     let mlbHeader = (
       <div className="row">
         <div className="col-md-12">

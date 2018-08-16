@@ -12,7 +12,7 @@ class Events extends Component {
   }
 
   render() {
-    const { events, loading, sport } = this.props.events;
+    const { events, loading } = this.props.events;
     let eventContent;
 
     if (events === null || loading) {
@@ -26,7 +26,7 @@ class Events extends Component {
         <div className="container">
           <div className="row">
             <div className="col-md-12">
-              <EventsHeader sport={sport} />
+              <EventsHeader />
               {eventContent}
             </div>
           </div>

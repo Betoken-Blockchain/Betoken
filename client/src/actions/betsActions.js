@@ -6,7 +6,8 @@ import {
   GET_BETS,
   GET_BET,
   BETS_LOADING,
-  CLEAR_ERRORS
+  CLEAR_ERRORS,
+  DELETE_BET
 } from './types';
 
 // Add Bet
@@ -62,6 +63,37 @@ export const getBet = id => dispatch => {
       dispatch({
         type: GET_BET,
         payload: null
+      })
+    );
+};
+
+// Accept Bet
+export const acceptBet = id => dispatch => {
+  axios
+    .post(`api/bets/accept/${id}`)
+    .then(res => dispatch(getBets()))
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
+};
+
+// Delete Bet
+export const deleteBet = id => dispatch => {
+  axios
+    .delete(`/api/bets/${id}`)
+    .then(res =>
+      dispatch({
+        type: DELETE_BET,
+        payload: id
+      })
+    )
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
       })
     );
 };

@@ -81,6 +81,28 @@ router.post(
   }
 );
 
+// @route   POST api/bets/accept/:id
+// @desc    Accept Bet
+// @access  Private
+router.post(
+  '/accept/:id',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    Profile.findOne({ user: req.user.id }).then(profile => {
+      Bet.findById(req.params.id).then(bet => {
+        // Check for bet receiver
+        if (bet.receiver.toString() !== req.user.id) {
+          return res.status(401).json({ notauthorized: 'User not authorized' });
+        }
+
+        // Accept
+        bet.accepted = true;
+        bet.save().then(bet => res.json(bet));
+      });
+    });
+  }
+);
+
 // @route   DELETE api/bets/:id
 // @desc    DELETE bet
 // @access  Private

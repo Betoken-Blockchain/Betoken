@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { acceptBet, deleteBet } from '../../actions/betsActions';
 
 import '../events/Events.css';
 
@@ -25,27 +26,57 @@ class BetItem extends Component {
     this.setState({ accepted: this.props.bet.accepted });
   }
 
+  onDeleteClick(id) {
+    if (window.confirm('Cancel this bet?')) {
+      this.props.deleteBet(id);
+      console.log('Bet Deleted');
+    }
+  }
+
+  onAcceptClick(id) {
+    if (window.confirm('Accept this bet?')) {
+      this.props.acceptBet(id);
+      this.setState({ accepted: true });
+      console.log('Bet Accepted');
+    }
+  }
+
   render() {
     const { auth, bet } = this.props;
     console.log('Props: ', this.props);
-    console.log('State: ', this.state);
 
     let acceptButton;
     if (this.state.accepted === false) {
       if (auth.user.id === bet.sender._id) {
         acceptButton = (
-          <button type="button" class="btn btn-danger accept-button">
+          <button
+            onClick={this.onDeleteClick.bind(this, bet._id)}
+            type="button"
+            className="btn btn-sm btn-outline-danger accept-button"
+          >
             Cancel Bet
           </button>
         );
       } else if (auth.user.id === bet.receiver._id) {
         acceptButton = (
-          <button type="button" class="btn btn-success accept-button">
-            Accept Bet
-          </button>
+          <span>
+            <button
+              onClick={this.onAcceptClick.bind(this, bet._id)}
+              type="button"
+              className="btn btn-sm btn-outline-success accept-button"
+            >
+              Accept
+            </button>
+            <button
+              onClick={this.onDeleteClick.bind(this, bet._id)}
+              type="button"
+              className="btn btn-sm btn-outline-danger accept-button"
+              style={{ marginTop: '5px' }}
+            >
+              Cancel
+            </button>
+          </span>
         );
-      } else {
-        null;
       }
     } else {
       acceptButton = null;
@@ -54,7 +85,13 @@ class BetItem extends Component {
     let acceptedBadge;
     if (this.state.accepted === false) {
       acceptedBadge = (
-        <span class="badge badge-warning accepted-badge">Not Accepted</span>
+        <span className="badge badge-warning accepted-badge">Not Accepted</span>
+      );
+    } else {
+      acceptedBadge = (
+        <span className="badge badge-pill badge-success accepted-badge">
+          Bet Accepted
+        </span>
       );
     }
 
@@ -65,11 +102,15 @@ class BetItem extends Component {
           <div className="games-schedule-items">
             <div className="row games-team">
               <div className="col-md-5">
+                <small>Sent to:</small>
+                <br />
                 <h3>{bet.receiver.name}</h3>
               </div>
               <div className="col-md-2">{acceptButton}</div>
               <div className="col-md-5">
                 <div className="row" />
+                <small>Sent by:</small>
+                <br />
                 <h3>{bet.sender.name}</h3>
               </div>
             </div>
@@ -120,6 +161,8 @@ class BetItem extends Component {
 }
 
 BetItem.propTypes = {
+  acceptBet: PropTypes.func.isRequired,
+  deleteBet: PropTypes.func.isRequired,
   bet: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired
 };
@@ -128,4 +171,7 @@ const mapStateToProps = state => ({
   auth: state.auth
 });
 
-export default connect(mapStateToProps)(BetItem);
+export default connect(
+  mapStateToProps,
+  { acceptBet, deleteBet }
+)(BetItem);
